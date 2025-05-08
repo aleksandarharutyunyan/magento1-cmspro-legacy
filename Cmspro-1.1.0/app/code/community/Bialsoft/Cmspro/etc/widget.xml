@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Bialsoft_Cmspro extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the GPL License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/gpl-license.php
+ * 
+ * @category       Bialsoft
+ * @package        Bialsoft_Cmspro
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<widgets>
+    <cmspro_cmscategory_view type="bialsoft_cmspro/cmscategory_widget_view" translate="name description" module="bialsoft_cmspro">
+        <name>Category view</name>
+        <description>Category view widget</description>
+        <is_email_compatible>0</is_email_compatible>
+        <parameters>
+            <cmscategory_id type="complex" translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <label>Category</label>
+                <type>label</type>
+                <helper_block>
+                    <type>bialsoft_cmspro/adminhtml_cmscategory_widget_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Select Category</open>
+                        </button>
+                    </data>
+                </helper_block>
+                <sort_order>120</sort_order>
+            </cmscategory_id>
+        </parameters>
+    </cmspro_cmscategory_view>
+    <cmspro_cmscategory_link type="bialsoft_cmspro/cmscategory_widget_link" translate="name description" module="bialsoft_cmspro">
+        <name>Category link</name>
+        <description>Category link widget</description>
+        <is_email_compatible>0</is_email_compatible>
+        <parameters>
+            <cmscategory_id type="complex" translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <label>Category</label>
+                <type>label</type>
+                <helper_block>
+                    <type>bialsoft_cmspro/adminhtml_cmscategory_widget_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Select Category</open>
+                        </button>
+                    </data>
+                </helper_block>
+                <sort_order>130</sort_order>
+            </cmscategory_id>
+        </parameters>
+    </cmspro_cmscategory_link>
+    <cmspro_article_view type="bialsoft_cmspro/article_widget_view" translate="name description" module="bialsoft_cmspro">
+        <name>Article view</name>
+        <description>Article view widget</description>
+        <is_email_compatible>0</is_email_compatible>
+        <parameters>
+            <article_id type="complex" translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <label>Article</label>
+                <type>label</type>
+                <helper_block>
+                    <type>bialsoft_cmspro/adminhtml_article_widget_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Select Article</open>
+                        </button>
+                    </data>
+                </helper_block>
+                <sort_order>120</sort_order>
+            </article_id>
+        </parameters>
+    </cmspro_article_view>
+    <cmspro_article_link type="bialsoft_cmspro/article_widget_link" translate="name description" module="bialsoft_cmspro">
+        <name>Article link</name>
+        <description>Article link widget</description>
+        <is_email_compatible>0</is_email_compatible>
+        <parameters>
+            <article_id type="complex" translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <label>Article</label>
+                <type>label</type>
+                <helper_block>
+                    <type>bialsoft_cmspro/adminhtml_article_widget_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Select Article</open>
+                        </button>
+                    </data>
+                </helper_block>
+                <sort_order>130</sort_order>
+            </article_id>
+        </parameters>
+    </cmspro_article_link>
+    <cmspro_cmscategory_subtree type="bialsoft_cmspro/cmscategory_widget_subtree" translate="name description" module="bialsoft_cmspro">
+        <name>Category subtree</name>
+        <description>Category subtree widget</description>
+        <is_email_compatible>0</is_email_compatible>
+        <parameters>
+            <cmscategory_id type="complex" translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <label>Category</label>
+                <type>label</type>
+                <helper_block>
+                    <type>bialsoft_cmspro/adminhtml_cmscategory_widget_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Select Category</open>
+                        </button>
+                    </data>
+                </helper_block>
+                <sort_order>10</sort_order>
+            </cmscategory_id>
+            <recursion type="complex" translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <value>0</value>
+                <label>Levels to show (0 for all)</label>
+                <type>text</type>
+                <sort_order>20</sort_order>
+            </recursion>
+        </parameters>
+    </cmspro_cmscategory_subtree>
+</widgets>

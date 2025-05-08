@@ -1,0 +1,37 @@
+<?php
+/**
+ * Bialsoft_Cmspro extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the GPL License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/gpl-license.php
+ * 
+ * @category       Bialsoft
+ * @package        Bialsoft_Cmspro
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Article list template on product page
+ *
+ * @category    Bialsoft
+ * @package     Bialsoft_Cmspro
+ 
+ */
+?>
+<?php $articles = $this->getArticleCollection();?>
+<?php if ($articles && $articles->count() > 0) :?>
+<div class="box-collateral box-articles box-up-sell">
+    <h2>Articles</h2>
+    <?php foreach ($articles as $_article) : ?>
+        <div class="item">
+            <a href="<?php echo $_article->getArticleUrl()?>">
+                <?php echo $_article->getTitle();?>
+            </a><br />
+        </div>
+    <?php endforeach; ?>
+</div>
+<?php endif;?>

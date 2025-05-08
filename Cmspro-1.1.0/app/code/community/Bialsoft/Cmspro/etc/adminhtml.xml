@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Bialsoft_Cmspro extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the GPL License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/gpl-license.php
+ *
+ * @category       Bialsoft
+ * @package        Bialsoft_Cmspro
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <bialsoft_cmspro translate="title" module="bialsoft_cmspro">
+                                        <title>Cmspro</title>
+                                    </bialsoft_cmspro>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <bialsoft_cmspro translate="title" module="bialsoft_cmspro">
+                        <title>Bialsoft CMSPro</title>
+                        <children>
+                            <cmscategory translate="title" module="bialsoft_cmspro">
+                                <title>Category</title>
+                                <sort_order>0</sort_order>
+                            </cmscategory>
+                            <article translate="title" module="bialsoft_cmspro">
+                                <title>Article</title>
+                                <sort_order>10</sort_order>
+                            </article>
+                            <article_comments translate="title" module="bialsoft_cmspro">
+                                <title>Manage Comments</title>
+                                <sort_order>15</sort_order>
+                            </article_comments>
+                        </children>
+                    </bialsoft_cmspro>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <menu>
+        <bialsoft_cmspro translate="title" module="bialsoft_cmspro">
+            <title>Bialsoft CMSPro</title>
+            <sort_order>100</sort_order>
+            <children>
+                <cmscategory translate="title" module="bialsoft_cmspro">
+                    <title>Category</title>
+                    <action>adminhtml/cmspro_cmscategory</action>
+                    <sort_order>0</sort_order>
+                </cmscategory>
+                <article translate="title" module="bialsoft_cmspro">
+                    <title>Article</title>
+                    <action>adminhtml/cmspro_article</action>
+                    <sort_order>10</sort_order>
+                </article>
+                <article_comments translate="title" module="bialsoft_cmspro">
+                    <title>Comments</title>
+                    <action>adminhtml/cmspro_article_comment</action>
+                    <sort_order>14</sort_order>
+                </article_comments>
+                <settings translate="title"  module="bialsoft_cmspro">
+                    <title>Configuration</title>
+                    <action>adminhtml/system_config/edit/section/bialsoft_cmspro</action>
+                    <sort_order>20</sort_order>
+                </settings>
+            </children>
+        </bialsoft_cmspro>
+    </menu>
+</config>

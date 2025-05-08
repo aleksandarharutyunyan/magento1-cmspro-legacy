@@ -1,0 +1,44 @@
+<?php
+/**
+ * Bialsoft_Cmspro extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the GPL License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/gpl-license.php
+ * 
+ * @category       Bialsoft
+ * @package        Bialsoft_Cmspro
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Article category list template
+ *
+ * @category    Bialsoft
+ * @package     Bialsoft_Cmspro
+ 
+ */
+?>
+<?php $categories = $this->getCategoryCollection(); ?>
+<?php if ($categories->count() > 0) : ?>
+    <div class="block block-list block-cmspro-related-categories">
+        <div class="block-title">
+            <strong>
+                <span><?php echo Mage::helper('catalog')->__('Categories'); ?></span>
+            </strong>
+
+        </div>
+        <ol class="mini-categories-list" id="cmspro-categories-sidebar">
+            <?php foreach ($categories as $category) : ?>
+                <li class="item">
+                    <a href="<?php echo $category->getUrl() ?>">
+                        <?php echo $category->getName(); ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+    </div>
+    </div>
+<?php endif; ?>

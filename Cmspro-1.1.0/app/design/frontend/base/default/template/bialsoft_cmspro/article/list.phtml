@@ -1,0 +1,51 @@
+<?php
+/**
+ * Bialsoft_Cmspro extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the GPL License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/gpl-license.php
+ * 
+ * @category       Bialsoft
+ * @package        Bialsoft_Cmspro
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Article list template
+ *
+ * @category    Bialsoft
+ * @package     Bialsoft_Cmspro
+ 
+ */
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $_articles = $this->getArticles(); ?>
+<div class="page-title article-title">
+    <?php if (Mage::helper('bialsoft_cmspro/article')->isRssEnabled()) : ?>
+        <a href="<?php echo Mage::helper('bialsoft_cmspro/article')->getRssUrl(); ?>" class="link-rss"><?php echo Mage::helper('bialsoft_cmspro')->__('Subscribe to RSS Feed') ?></a>
+    <?php endif; ?>
+    <h1><?php echo Mage::helper('bialsoft_cmspro')->__('Articles') ?></h1>
+</div>
+<?php if ($_articles->getSize() > 0) : ?>
+    <div class="toolbar">
+        <?php echo $this->getPagerHtml(); ?>
+    </div>
+    <div class="article-list-container">
+        <?php foreach ($_articles as $_article) : ?>
+            <div class="article-list-item">
+                <a href="<?php echo $_article->getArticleUrl() ?>">
+                    <?php echo $_article->getTitle(); ?>
+                </a><br />
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <div class="toolbar">
+        <?php echo $this->getPagerHtml(); ?>
+    </div>
+<?php else : ?>
+    <?php echo Mage::helper('bialsoft_cmspro')->__('There are no articles at this moment'); ?>
+<?php endif; ?>

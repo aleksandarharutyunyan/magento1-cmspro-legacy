@@ -1,0 +1,55 @@
+<?php
+/**
+ * Bialsoft_Cmspro extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the GPL License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/gpl-license.php
+ * 
+ * @category       Bialsoft
+ * @package        Bialsoft_Cmspro
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Article list template on product page
+ *
+ * @category    Bialsoft
+ * @package     Bialsoft_Cmspro
+
+ */
+?>
+<?php $_articles = $this->getArticleCollection(); ?>
+<?php if ($_articles && $_articles->count() > 0) : ?>
+    <div class="block block-list block-cmspro-related-articles">
+        <ol class="products-list" id="products-list">
+            <?php foreach ($_articles as $_article) : ?>
+
+
+
+
+                <li class="item<?php if (++$_iterator == sizeof($_articles->getSize())): ?> last<?php endif; ?>">
+                    <h3><a href="<?php echo $_article->getArticleUrl() ?>" title="<?php echo $this->escapeHtml($_article->getTitle()); ?>"><?php echo $_article->getTitle(); ?></a></h3>
+
+                    <?php // Product description    ?>
+                    <div class="article-description">
+                        <a href="<?php echo $_article->getArticleUrl() ?>" title="<?php echo $this->escapeHtml($_article->getTitle()); ?>" style="float:left; margin:10px;">
+                            <img src="<?php
+                            echo Mage::helper('bialsoft_cmspro/article_image')->init($_article,
+                                'image')->resize(135);
+                            ?>" alt="<?php echo $this->escapeHtml($_article->getTitle()); ?>" /></a>
+                            <?php
+                            echo $_article->getSummary();
+                            ?>
+
+                    </div>
+                </li>
+
+
+            <?php endforeach; ?>
+        </ol>
+    </div>
+<?php endif; ?>

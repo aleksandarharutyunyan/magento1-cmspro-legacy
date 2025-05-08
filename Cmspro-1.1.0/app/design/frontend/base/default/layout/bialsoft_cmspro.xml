@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Bialsoft_Cmspro extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the GPL License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/gpl-license.php
+ *
+ * @category       Bialsoft
+ * @package        Bialsoft_Cmspro
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <js>css/bialsoft_cmspro/tree.css</js>
+            </action>
+        </reference>
+        <reference name="top.links">
+            <action method="addLink" ifconfig="bialsoft_cmspro/cmscategory/link_in_toplinks" translate="label title" module="bialsoft_cmspro">
+                <label helper="bialsoft_cmspro/cmscategory/getRootCmscategoryName"/>
+                <url helper="bialsoft_cmspro/cmscategory/getRootCmscategoryUrl" />
+                <title helper="bialsoft_cmspro/cmscategory/getRootCmscategoryName"/>
+                <prepare />
+                <urlParams/>
+                <position>120</position>
+            </action>
+        </reference>
+        <reference name="footer_links">
+            <action method="addLink" ifconfig="bialsoft_cmspro/cmscategory/link_in_footerlinks" translate="label title" module="bialsoft_cmspro">
+                <label helper="bialsoft_cmspro/cmscategory/getRootCmscategoryName"/>
+                <url helper="bialsoft_cmspro/cmscategory/getRootCmscategoryUrl" />
+                <title helper="bialsoft_cmspro/cmscategory/getRootCmscategoryName"/>
+                <prepare />
+                <urlParams/>
+                <position>120</position>
+            </action>
+        </reference>
+    </default>
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="bialsoft_cmspro">
+                <name>article_comments</name>
+                <path>bialsoft_cmspro/article_customer_comment</path>
+                <label>Articles Comments</label>
+            </action>
+        </reference>
+    </customer_account>
+    <bialsoft_cmspro_cmscategory_index translate="label" module="bialsoft_cmspro">
+        <label>Categories list</label>
+
+        <reference name="head">
+            <action method="addItem" ifconfig="bialsoft_cmspro/cmscategory/tree">
+                <type>skin_js</type>
+                <js>js/bialsoft_cmspro/tree.js</js>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="bialsoft_cmspro/cmscategory_childrenroot" name="cmscategory_childrenroot" template="bialsoft_cmspro/cmscategory/childrenroot.phtml" />
+            <!--<block type="bialsoft_cmspro/cmscategory_list" name="cmscategory_list" template="bialsoft_cmspro/cmscategory/list.phtml" />-->
+        </reference>
+        <reference name="left">
+            <block type="bialsoft_cmspro/cmscategory_list" name="cmscategory_list" template="bialsoft_cmspro/cmscategory/listsidebar.phtml" />
+        </reference>
+        <reference name="right">
+            <block type="bialsoft_cmspro/cmscategory_list" name="cmscategory_list" template="bialsoft_cmspro/cmscategory/listsidebar.phtml" />
+        </reference>
+    </bialsoft_cmspro_cmscategory_index>
+    <bialsoft_cmspro_article_index translate="label" module="bialsoft_cmspro">
+        <label>Articles list</label>
+        <reference name="content">
+            <block type="bialsoft_cmspro/article_list" name="article_list" template="bialsoft_cmspro/article/list.phtml" />
+        </reference>
+    </bialsoft_cmspro_article_index>
+    <bialsoft_cmspro_cmscategory_view translate="label" module="bialsoft_cmspro">
+        <label>Category view page</label>
+        <reference name="head">
+            <action method="addItem" ifconfig="bialsoft_cmspro/cmscategory/tree">
+                <type>skin_js</type>
+                <js>js/bialsoft_cmspro/tree.js</js>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="bialsoft_cmspro/cmscategory_view" name="cmscategory_view" template="bialsoft_cmspro/cmscategory/view.phtml" />
+            <!--<block type="bialsoft_cmspro/cmscategory_children" name="cmscategory_children" template="bialsoft_cmspro/cmscategory/children.phtml" />-->
+            <block type="bialsoft_cmspro/cmscategory_article_list" name="cmscategory.article_list" as="cmscategory_articles" template="bialsoft_cmspro/cmscategory/article/list.phtml" />
+        </reference>
+        <reference name="left">
+            <block type="bialsoft_cmspro/cmscategory_list" name="cmscategory_list" template="bialsoft_cmspro/cmscategory/listsidebar.phtml" />
+        </reference>
+        <reference name="right">
+            <block type="bialsoft_cmspro/cmscategory_list" name="cmscategory_list" template="bialsoft_cmspro/cmscategory/listsidebar.phtml" />
+        </reference>
+    </bialsoft_cmspro_cmscategory_view>
+    <bialsoft_cmspro_article_view translate="label" module="bialsoft_cmspro">
+        <label>Article view page</label>
+
+        <reference name="content">
+            <block type="bialsoft_cmspro/article_view" name="article_view" template="bialsoft_cmspro/article/view.phtml" />
+
+            <block type="bialsoft_cmspro/article_comment_list" name="article.comments_list" as="article_comment_list" template="bialsoft_cmspro/article/comment/list.phtml">
+                <block type="bialsoft_cmspro/article_comment_form" name="comment_form" as="comment_form" template="bialsoft_cmspro/article/comment/form.phtml" />
+
+            </block>
+        </reference>
+        <reference name="left">
+            <block type="bialsoft_cmspro/cmscategory_list" name="cmscategory_list" template="bialsoft_cmspro/cmscategory/listsidebar.phtml" />
+            <block type="bialsoft_cmspro/article_catalog_product_list" name="article.info.products" as="article_products" template="bialsoft_cmspro/article/catalog/product/list.phtml" />
+            <block type="bialsoft_cmspro/article_catalog_category_list" name="article.info.categories" as="article_categories" template="bialsoft_cmspro/article/catalog/category/list.phtml" />
+        </reference>
+        <reference name="right">
+            <block type="bialsoft_cmspro/cmscategory_list" name="cmscategory_list" template="bialsoft_cmspro/cmscategory/listsidebar.phtml" />
+            <block type="bialsoft_cmspro/article_catalog_product_list" name="article.info.products" as="article_products" template="bialsoft_cmspro/article/catalog/product/list.phtml" />
+            <block type="bialsoft_cmspro/article_catalog_category_list" name="article.info.categories" as="article_categories" template="bialsoft_cmspro/article/catalog/category/list.phtml" />
+        </reference>
+    </bialsoft_cmspro_article_view>
+    <bialsoft_cmspro_cmscategory_rss translate="label" module="bialsoft_cmspro">
+        <label>Categories rss feed</label>
+        <block type="bialsoft_cmspro/cmscategory_rss" output="toHtml" name="bialsoft_cmspro.cmscategory.rss" />
+    </bialsoft_cmspro_cmscategory_rss>
+    <bialsoft_cmspro_article_rss translate="label" module="bialsoft_cmspro">
+        <label>Articles rss feed</label>
+        <block type="bialsoft_cmspro/article_rss" output="toHtml" name="bialsoft_cmspro.article.rss" />
+    </bialsoft_cmspro_article_rss>
+    <rss_index_index>
+        <reference name="content">
+            <block type="bialsoft_cmspro/rss" name="cmspro.rss" template="bialsoft_cmspro/rss.phtml">
+                <action method="addFeed" ifconfig="bialsoft_cmspro/cmscategory/rss" translate="label" module="bialsoft_cmspro">
+                    <label>Categories</label>
+                    <url helper="bialsoft_cmspro/cmscategory/getRssUrl" />
+                </action>
+                <action method="addFeed" ifconfig="bialsoft_cmspro/article/rss" translate="label" module="bialsoft_cmspro">
+                    <label>Articles</label>
+                    <url helper="bialsoft_cmspro/article/getRssUrl" />
+                </action>
+            </block>
+        </reference>
+    </rss_index_index>
+    <catalog_product_view>
+        <reference name="product.info">
+            <block type="bialsoft_cmspro/catalog_product_list_article" name="product.info.articles" as="product_articles" template="bialsoft_cmspro/catalog/product/list/article.phtml">
+                <action method="addToParentGroup">
+                    <group>detailed_info</group>
+                </action>
+                <action method="setTitle" translate="value" module="bialsoft_cmspro">
+                    <value>Articles</value>
+                </action>
+            </block>
+        </reference>
+    </catalog_product_view>
+    <bialsoft_cmspro_category>
+        <reference name="content">
+            <block type="bialsoft_cmspro/catalog_category_list_article" name="category.info.articles" as="category_articles" template="bialsoft_cmspro/catalog/category/list/article.phtml" after="-" />
+        </reference>
+    </bialsoft_cmspro_category>
+    <catalog_category_default>
+        <update handle="bialsoft_cmspro_category" />
+    </catalog_category_default>
+    <catalog_category_layered>
+        <update handle="bialsoft_cmspro_category" />
+    </catalog_category_layered>
+    <bialsoft_cmspro_article_customer_comment_index translate="label" module="bialsoft_cmspro">
+        <label>My Articles comments</label>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="bialsoft_cmspro/article_customer_comment_list" name="customer_article_comments" template="bialsoft_cmspro/article/customer/comment/list.phtml"/>
+        </reference>
+    </bialsoft_cmspro_article_customer_comment_index>
+    <bialsoft_cmspro_article_customer_comment_view translate="label" module="bialsoft_cmspro">
+        <label>My Articles comment view</label>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="bialsoft_cmspro/article_customer_comment_view" name="customer_article_comment" template="bialsoft_cmspro/article/customer/comment/view.phtml"/>
+        </reference>
+    </bialsoft_cmspro_article_customer_comment_view>
+</layout>

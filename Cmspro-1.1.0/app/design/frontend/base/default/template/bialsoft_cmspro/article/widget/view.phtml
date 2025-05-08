@@ -1,0 +1,45 @@
+<?php
+/**
+ * Bialsoft_Cmspro extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the GPL License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/gpl-license.php
+ * 
+ * @category       Bialsoft
+ * @package        Bialsoft_Cmspro
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Article view widget template
+ *
+ * @category    Bialsoft
+ * @package     Bialsoft_Cmspro
+ 
+ */
+?>
+<?php $_article = $this->getCurrentArticle();?>
+<?php if ($_article) :?>
+    <div class="article-widget-view">
+        <h3><?php echo $_article->getTitle()?></h3>
+        <div>
+            <div class="title-widget">
+                <?php echo Mage::helper('bialsoft_cmspro')->__('Title');?>:<?php echo $_article->getTitle();?>
+            </div>
+            <div class="summary-widget">
+                <?php echo Mage::helper('bialsoft_cmspro')->__('Summary');?>:<?php echo $_article->getSummary();?>
+            </div>
+            <div class="content-widget">
+                <?php echo Mage::helper('bialsoft_cmspro')->__('Content');?>:<?php echo $_article->getContent();?>
+            </div>
+            <div class="author-widget">
+                <?php echo Mage::helper('bialsoft_cmspro')->__('Author');?>:<?php echo $_article->getAuthor();?>
+            </div>
+
+        </div>
+    </div>
+<?php endif;?>

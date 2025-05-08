@@ -1,0 +1,156 @@
+<?php
+/**
+ * Bialsoft_Cmspro extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the GPL License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/gpl-license.php
+ * 
+ * @category       Bialsoft
+ * @package        Bialsoft_Cmspro
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+?>
+<div class="content-header">
+    <h3 class="icon-head head-categories">
+        <?php echo $this->escapeHtml($this->getHeader()) . ($this->getCmscategoryId() ? ' (' . Mage::helper('bialsoft_cmspro')->__('ID: %s', $this->getCmscategoryId()) . ')' : '') ?>
+    </h3>
+    <p class="content-buttons form-buttons">
+        <?php echo $this->getResetButtonHtml() ?>
+        <?php if ($this->getCmscategoryId()): ?>
+            <?php echo $this->getDeleteButtonHtml() ?>
+        <?php endif; ?>
+        <?php echo $this->getAdditionalButtonsHtml(); ?>
+        <?php echo $this->getSaveButtonHtml() ?>
+    </p>
+</div>
+<?php echo $this->getTabsHtml() ?>
+<iframe name="iframeSave" style="display:none; width:100%;" src="<?php echo $this->getJsUrl() ?>blank.html"></iframe>
+<form target="iframeSave" id="cmscategory_edit_form" action="<?php echo $this->getSaveUrl() ?>" method="post" enctype="multipart/form-data">
+    <div class="no-display">
+        <input type="hidden" name="isIframe" value="1" />
+        <input name="form_key" type="hidden" value="<?php echo $this->getFormKey() ?>" />
+        <input type="hidden" name="active_tab_id" id="active_tab_id" value="" />
+    </div>
+    <div id="cmscategory_tab_content"></div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    cmscategoryForm = new varienForm('cmscategory_edit_form');
+    cmscategoryForm.submit= function (url) {
+        this.errorSections = $H({});
+        this.canShowError = true;
+        this.submitUrl = url;
+        if (this.validator && this.validator.validate()) {
+            if (this.validationUrl) {
+                this._validate();
+            } else {
+                if (this.isSubmitted) {
+                    return false;
+                }
+                this.isSubmitted = true;
+                this._submit();
+            }
+            displayLoadingMask();
+            return true;
+        }
+        return false;
+    };
+    cmscategoryForm.refreshPath = function () {
+        cmscategoryId = this.getCmscategoryId();
+        if (!cmscategoryId) {
+            return false;
+        }
+        var refreshPathSuccess = function(transport) {
+            if (transport.responseText.isJSON()) {
+                response = transport.responseText.evalJSON()
+                if (response.error) {
+                    alert(response.message);
+                } else {
+                    if (cmscategoryForm.getCmscategoryId() == response['id']) {
+                        cmscategoryForm.setCmscategoryPath(response['path']);
+                    }
+                }
+            }
+        };
+        new Ajax.Request(
+            '<?php echo $this->getRefreshPathUrl() ?>',
+            {
+                method: 'POST',
+                evalScripts: true,
+                onSuccess: refreshPathSuccess
+            }
+        );
+    };
+
+    cmscategoryForm.getCmscategoryId = function () {
+        collection = $(this.formId).getInputs('hidden', 'cmscategory[id]');
+        if (collection.size() > 0) {
+            return collection.first().value;
+        }
+        return false;
+    };
+    cmscategoryForm.setCmscategoryPath = function (path) {
+        collection = $(this.formId).getInputs('hidden', 'cmscategory[path]');
+        if (collection.size() > 0) {
+            return collection.first().value = path;
+        }
+    };
+    function cmscategorySubmit(url, useAjax) {
+        var activeTab = $('active_tab_id');
+        if (activeTab) {
+            if (activeTab.tabsJsObject && activeTab.tabsJsObject.activeTab) {
+                activeTab.value = activeTab.tabsJsObject.activeTab.id;
+            }
+        }
+        var params = {};
+        var fields = $('cmscategory_edit_form').getElementsBySelector('input', 'select');
+        for(var i=0;i<fields.length;i++) {
+            if (!fields[i].name) {
+                continue;
+            }
+            params[fields[i].name] = fields[i].getValue();
+        }
+        var cmscategoryId = params['cmscategory[id]'] ? params['cmscategory[id]'] : 0;
+        var isCreating = cmscategoryId == 0;
+        var path = params['cmscategory[path]'].split('/');
+        var parentId = path.pop();
+        if (parentId == cmscategoryId) {
+            parentId = path.pop();
+        }
+        if (isCreating) {
+            if (!tree.currentNodeId) {
+                tree.currentNodeId = parentId;
+            }
+            tree.addNodeTo = parentId;
+        } else {
+            var currentNode = tree.getNodeById(cmscategoryId);
+            var oldClass = 'active-category';
+            var newClass = 'active-category';
+            if (currentNode) {
+                if (parseInt(params['cmscategory[status]'])) {
+                    var oldClass = 'no-active-category';
+                    var newClass = 'active-category';
+                } else {
+                    var oldClass = 'active-category';
+                    var newClass = 'no-active-category';
+                }
+                Element.removeClassName(currentNode.ui.wrap.firstChild, oldClass);
+                Element.addClassName(currentNode.ui.wrap.firstChild, newClass);
+            }
+        }
+        cmscategoryForm.submit();
+    }
+    <?php if ($this->isAjax() && ($block = $this->getLayout()->getBlock('tabs')) && ($_tabsJsObject=$block->getJsObjectName())): ?>
+        <?php echo $_tabsJsObject ?>.moveTabContentInDest();
+        if (<?php echo $_tabsJsObject ?>.activeTab) {
+            $('active_tab_id').value = <?php echo $_tabsJsObject ?>.activeTab.id;
+        }
+        $('active_tab_id').tabsJsObject = <?php echo $_tabsJsObject ?>;
+    <?php endif; ?>
+//]]>
+</script>

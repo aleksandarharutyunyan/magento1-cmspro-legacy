@@ -1,0 +1,59 @@
+<?php
+/**
+ * Bialsoft_Cmspro extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the GPL License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/gpl-license.php
+ * 
+ * @category       Bialsoft
+ * @package        Bialsoft_Cmspro
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Article product list template
+ *
+ * @category    Bialsoft
+ * @package     Bialsoft_Cmspro
+ 
+ */
+?>
+<?php $products = $this->getProductCollection(); ?>
+<?php if ($products->count() > 0) : ?>
+    <div class="block block-list block-cmspro-related-products">
+        <div class="block-title">
+            <strong>
+                <span><?php echo Mage::helper('catalog')->__('Products'); ?></span>
+            </strong>
+
+        </div>
+        <ol class="mini-products-list" id="cmspro-products-sidebar">
+            <?php foreach ($products as $product):
+                ?>
+
+                <li class="item">
+                    <a href="<?php echo $product->getProductUrl(); ?>" title="<?php echo $this->escapeHtml($product->getName()) ?>" class="product-image"><img src="<?php
+                        echo $this->helper('catalog/image')->init($product,
+                            'thumbnail')->resize(50);
+                        ?>" width="50" height="50" alt="<?php echo $this->escapeHtml($product->getName()) ?>" /></a>
+                    <div class="product-details">
+                        <p class="product-name"><a href="<?php echo $product->getProductUrl(); ?>"><?php echo $this->escapeHtml($product->getName()) ?></a></p>
+                        <?php
+                        if ($product->isSaleable() && $product->isVisibleInSiteVisibility()):
+                            ?>
+                            <a href="<?php echo $this->getItemAddToCartUrl($_item) ?>" class="link-cart"><?php echo $this->__('Add to Cart') ?></a>
+                        <?php endif; ?>
+                        <?php
+                        echo $this->getPriceHtml($product, false, '-wishlist')
+                        ?>
+                    </div>
+                </li>
+    <?php endforeach; ?>
+        </ol>
+
+    </div>
+<?php endif; ?>

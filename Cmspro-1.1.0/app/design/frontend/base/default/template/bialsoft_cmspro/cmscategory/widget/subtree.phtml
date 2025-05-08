@@ -1,0 +1,36 @@
+<?php
+/**
+ * Bialsoft_Cmspro extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the GPL License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/gpl-license.php
+ * 
+ * @category       Bialsoft
+ * @package        Bialsoft_Cmspro
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Category subtree template
+ *
+ * @category    Bialsoft
+ * @package     Bialsoft_Cmspro
+ 
+ */
+?>
+<?php $_cmscategories = $this->getCmscategories(); ?>
+<?php if ($_cmscategories->getSize() > 0) :?>
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/bialsoft_cmspro/tree.js')?>"></script>
+    <ul id="<?php echo $this->getUniqueId()?>">
+        <?php foreach ($_cmscategories as $_cmscategory) : ?>
+            <?php echo $this->drawCmscategory($_cmscategory);?>
+        <?php endforeach;?>
+    </ul>
+    <script type="text/javascript">
+        cmsproTree('<?php echo $this->getUniqueId()?>');
+    </script>
+<?php endif;?>

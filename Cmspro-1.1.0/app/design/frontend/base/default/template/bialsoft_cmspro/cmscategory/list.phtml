@@ -1,0 +1,65 @@
+<?php
+/**
+ * Bialsoft_Cmspro extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the GPL License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/gpl-license.php
+ * 
+ * @category       Bialsoft
+ * @package        Bialsoft_Cmspro
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Category list template
+ *
+ * @category    Bialsoft
+ * @package     Bialsoft_Cmspro
+
+ */
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $_cmscategories = $this->getCmscategories(); ?>
+<div class="page-title cmscategory-title">
+    <?php if (Mage::helper('bialsoft_cmspro/cmscategory')->isRssEnabled()) : ?>
+        <a href="<?php echo Mage::helper('bialsoft_cmspro/cmscategory')->getRssUrl(); ?>" class="link-rss"><?php echo Mage::helper('bialsoft_cmspro')->__('Subscribe to RSS Feed') ?></a>
+    <?php endif; ?>
+    <h1><?php
+        echo (Mage::getStoreConfig('bialsoft_cmspro/cmscategory/main_title')) ? Mage::getStoreConfig('bialsoft_cmspro/cmscategory/main_title')
+                : Mage::helper('bialsoft_cmspro')->__('Categories')
+        ?></h1>
+</div>
+<?php if ($_cmscategories->getSize() > 0) : ?>
+        <?php if ($this->_getDisplayMode() == 0) : ?>
+        <div class="toolbar">
+        <?php echo $this->getPagerHtml(); ?>
+        </div>
+        <div class="cmscategory-list-container">
+        <?php foreach ($_cmscategories as $_cmscategory) : ?>
+                <div class="cmscategory-list-item">
+                    <a href="<?php echo $_cmscategory->getCmscategoryUrl() ?>">
+            <?php echo $_cmscategory->getTitle(); ?>
+                    </a><br />
+                </div>
+        <?php endforeach; ?>
+        </div>
+        <div class="toolbar">
+        <?php echo $this->getPagerHtml(); ?>
+        </div>
+        <?php else : ?>
+        <ul id="cmscategories-list" class="tree">
+            <?php foreach ($_cmscategories as $_cmscategory) : ?>
+                <?php echo $this->drawCmscategory($_cmscategory); ?>
+        <?php endforeach; ?>
+        </ul>
+        <script type="text/javascript">
+            //cmsproTree('cmscategories-list');
+        </script>
+    <?php endif; ?>
+<?php else : ?>
+    <?php echo Mage::helper('bialsoft_cmspro')->__('There are no categories at this moment'); ?>
+<?php endif; ?>
